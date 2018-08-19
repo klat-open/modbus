@@ -31,5 +31,15 @@ namespace TQElectronic.Utils.Types
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
+
+        public static int ToInt(this string st, int defaultValue = 0)
+        {
+            return st.IsInt() ? int.Parse(st) : defaultValue;
+        }
+
+        public static float ToFloat(this string st, float defaultValue = 0)
+        {
+            return st.IsFloat() ? float.Parse(st) : defaultValue;
+        }
     }
 }

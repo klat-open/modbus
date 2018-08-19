@@ -71,6 +71,8 @@
     <Compile Include="SystemManagement\ProcessInfoUtils.cs" />
     <Compile Include="SystemManagement\SystemInfo.cs" />
     <Compile Include="SystemManagement\SystemInfoUtils.cs" />
+    <Compile Include="Types\BytesUtils.cs" />
+    <Compile Include="Types\DateTimeUtils.cs" />
     <Compile Include="Types\EnumUtils.cs" />
     <Compile Include="Types\StringUtils.cs" />
   </ItemGroup>
