@@ -110,6 +110,13 @@ namespace TQElectronic.Utils.Types
             return bytes;
         }
 
+        public static byte[] CopyRange(this byte[] bytes, int offset, int length)
+        {
+            var ret = new byte[length];
+            Array.Copy(bytes, offset, ret, 0, length);
+            return ret;
+        }
+
         public static byte[] Copy(this byte[] bytes, int requiredLength, byte fillMissing)
         {
             byte[] dest = new byte[requiredLength <= 0 ? bytes.Length : requiredLength];
@@ -148,6 +155,22 @@ namespace TQElectronic.Utils.Types
             Array.Copy(bytes1, 0, combined, 0, bytes1.Length);
             Array.Copy(bytes2, 0, combined, bytes1.Length, bytes2.Length);
             return combined;
+        }
+
+        public static byte[] EnsureBitEndian(this byte[] bytes)
+        {
+            var copied = Copy(bytes);
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(copied);
+            return copied;
+        }
+
+        public static byte[] EnsureLittleEndian(this byte[] bytes)
+        {
+            var copied = Copy(bytes);
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(copied);
+            return copied;
         }
     }
 }
