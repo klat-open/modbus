@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -40,6 +41,27 @@ namespace TQElectronic.Utils.Types
         public static float ToFloat(this string st, float defaultValue = 0)
         {
             return st.IsFloat() ? float.Parse(st) : defaultValue;
+        }
+
+        public static byte[] ToBytes(this string st, char split, NumberStyles numberStyles)
+        {
+            if (string.IsNullOrEmpty(st) || string.IsNullOrWhiteSpace(st))
+                return new byte[] { };
+
+            var parts = st.Trim().Split(new char[] { split }, StringSplitOptions.RemoveEmptyEntries);
+            return parts
+                .Select(part => byte.Parse(part, numberStyles))
+                .ToArray();
+        }
+
+        public static byte[] ToBytes(this string st, char split)
+        {
+            return ToBytes(st, split, NumberStyles.HexNumber);
+        }
+
+        public static byte[] ToBytes(this string st)
+        {
+            return ToBytes(st, ' ', NumberStyles.HexNumber);
         }
     }
 }

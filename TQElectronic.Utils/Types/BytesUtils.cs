@@ -109,5 +109,45 @@ namespace TQElectronic.Utils.Types
                 Array.Reverse(bytes);
             return bytes;
         }
+
+        public static byte[] Copy(this byte[] bytes, int requiredLength, byte fillMissing)
+        {
+            byte[] dest = new byte[requiredLength <= 0 ? bytes.Length : requiredLength];
+            Fill(dest, fillMissing);
+            Array.Copy(bytes, 0, dest, 0, Math.Min(dest.Length, bytes.Length));
+            return dest;
+        }
+
+        public static byte[] Copy(this byte[] bytes, int requiredLength)
+        {
+            return Copy(bytes, requiredLength, 0);
+        }
+
+        public static byte[] Copy(this byte[] bytes)
+        {
+            return Copy(bytes, -1);
+        }
+
+        public static byte[] Fill(this byte[] bytes, int offset, int length, byte fillValue)
+        {
+            for (var i = 0; i < length; i++)
+            {
+                bytes[i + offset] = fillValue;
+            }
+            return bytes;
+        }
+
+        public static byte[] Fill(this byte[] bytes, byte fillValue)
+        {
+            return Fill(bytes, 0, bytes.Length, fillValue);
+        }
+
+        public static byte[] CombineWith(this byte[] bytes1, byte[] bytes2)
+        {
+            var combined = new byte[bytes1.Length + bytes2.Length];
+            Array.Copy(bytes1, 0, combined, 0, bytes1.Length);
+            Array.Copy(bytes2, 0, combined, bytes1.Length, bytes2.Length);
+            return combined;
+        }
     }
 }
