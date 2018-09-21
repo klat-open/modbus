@@ -40,6 +40,16 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Event\AnonymousSubscriber.cs" />
+    <Compile Include="Event\AsyncOperationInvonker.cs" />
+    <Compile Include="Event\DefaultThreadHelper.cs" />
+    <Compile Include="Event\EventBus.cs" />
+    <Compile Include="Event\IdentifiedSubscriber.cs" />
+    <Compile Include="Event\IInvonker.cs" />
+    <Compile Include="Event\IThreadHelper.cs" />
+    <Compile Include="Event\Precondition.cs" />
+    <Compile Include="Event\SubscribeAttribute.cs" />
+    <Compile Include="Event\Subscriber.cs" />
     <Compile Include="Limitation\FrequencyThrottler.cs" />
     <Compile Include="Limitation\IThrottler.cs" />
     <Compile Include="Limitation\TimeoutThrottler.cs" />
@@ -60,12 +70,6 @@
     <Compile Include="Intercomm\Internal\SendingData.cs" />
     <Compile Include="Intercomm\Internal\SimpleWorker.cs" />
     <Compile Include="Intercomm\Internal\StreamString.cs" />
-    <Compile Include="Event\EventBus.cs" />
-    <Compile Include="Event\IThreadHelper.cs" />
-    <Compile Include="Event\NonUiThreadHelper.cs" />
-    <Compile Include="Event\SubscribeAttribute.cs" />
-    <Compile Include="Event\ThreadMode.cs" />
-    <Compile Include="Event\Subscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManagement\ProcessInfo.cs" />
     <Compile Include="SystemManagement\ProcessInfoUtils.cs" />

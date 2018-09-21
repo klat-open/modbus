@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TQElectronic.Utils.WinForms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TQElectronic.Utils.DevExpress", "TQElectronic.Utils.DevExpress\TQElectronic.Utils.DevExpress.csproj", "{FB4E9900-5774-4FE2-B54F-07844C3C16B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TQElectronic.Utils.Tests", "TQElectronic.Utils.Tests\TQElectronic.Utils.Tests.csproj", "{9DFA960B-23FE-4E87-A1E5-C62D28DED294}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FB4E9900-5774-4FE2-B54F-07844C3C16B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4E9900-5774-4FE2-B54F-07844C3C16B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4E9900-5774-4FE2-B54F-07844C3C16B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFA960B-23FE-4E87-A1E5-C62D28DED294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFA960B-23FE-4E87-A1E5-C62D28DED294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFA960B-23FE-4E87-A1E5-C62D28DED294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFA960B-23FE-4E87-A1E5-C62D28DED294}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

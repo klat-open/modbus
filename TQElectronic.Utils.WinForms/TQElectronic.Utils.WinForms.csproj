@@ -43,7 +43,7 @@
     <Compile Include="DynamicDock.cs" />
     <Compile Include="Properties\Resources.cs" />
     <Compile Include="Properties\Settings.cs" />
-    <Compile Include="Event\ThreadHelper.cs" />
+    <Compile Include="Event\WinFormInvonker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

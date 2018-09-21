@@ -1,56 +1,54 @@
 ﻿using System;
-using System.Globalization;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace TQElectronic.Utils.Event
 {
-    internal class Subscriber
+    internal abstract class Subscriber
     {
-        private readonly SubscribeAttribute _subscribeAttribute;
-        private readonly MethodInfo _subscriberMethodInfo;
-        private readonly Type _subscribeType;
-        private IThreadHelper _threadHelper;
+        public Description Description { get; }
 
-        public void SetThreadHelper(IThreadHelper threadHelper)
+        public IThreadHelper ThreadHelper { get; set; }
+
+        public object Source { get; }
+        
+        protected Subscriber(Description description, object source, IThreadHelper threadHelper)
         {
-            this._threadHelper = threadHelper;
+            Description = description;
+            Source = source;
+            ThreadHelper = threadHelper;
         }
 
-        public Subscriber(SubscribeAttribute subscribeAttribute, MethodInfo subscriberMethodInfo)
+        protected abstract Action<object> GetExecuteAction();
+
+        public void Execute(object message)
         {
-            this._subscribeAttribute = subscribeAttribute;
-            this._subscriberMethodInfo = subscriberMethodInfo;
-            ParameterInfo[] parameters = this._subscriberMethodInfo.GetParameters();
-            if (parameters.Length != 1)
-                throw new ArgumentException("Subscriber method must have only one parameter.");
-            this._subscribeType = parameters[0].ParameterType;
+            Execute(GetExecuteAction(), message);
         }
 
-        public void Execute(object container, object message)
+        private void Execute(Action<object> job, object message)
         {
-            if (!this._subscribeType.IsInstanceOfType(message))
-                return;
-            switch (this._subscribeAttribute.ThreadMode)
+            if (!Description.ParameterType.IsInstanceOfType(message)) return;
+
+            switch (Description.ThreadMode)
             {
                 case ThreadMode.Post:
-                    this.ExecuteSubscriber(container, message);
+                    ExecuteSubscriber(job, message);
                     break;
 
                 case ThreadMode.Thread:
-                    this.ExecuteSubscriberInBackground(container, message);
+                    ExecuteSubscriberInBackground(job, message);
                     break;
 
                 case ThreadMode.Async:
-                    this.ExecuteSubscriberAsync(container, message);
+                    ExecuteSubscriberAsync(job, message);
                     break;
 
                 case ThreadMode.Main:
-                    this.ExecuteSubscriberInMain(container, message);
+                    ExecuteSubscriberInMain(job, message);
                     break;
 
                 case ThreadMode.MainOrder:
-                    this.ExecuteSubscriberInMainOrder(container, message);
+                    ExecuteSubscriberInMainOrder(job, message);
                     break;
 
                 default:
@@ -58,35 +56,32 @@ namespace TQElectronic.Utils.Event
             }
         }
 
-        private void ExecuteSubscriberInMainOrder(object container, object message)
+        private void ExecuteSubscriberInMainOrder(Action<object> job, object message)
         {
-            this._threadHelper.RunInMain((Action)(() => this.ExecuteSubscriber(container, message)), false);
+            ThreadHelper.RunInMainThread(() => { ExecuteSubscriber(job, message); }, false);
         }
 
-        private void ExecuteSubscriberInMain(object container, object message)
+        private void ExecuteSubscriberInMain(Action<object> job, object message)
         {
-            this._threadHelper.RunInMain((Action)(() => this.ExecuteSubscriber(container, message)), true);
+            ThreadHelper.RunInMainThread(() => { ExecuteSubscriber(job, message); }, true);
         }
 
-        private void ExecuteSubscriberAsync(object container, object message)
+        private void ExecuteSubscriberAsync(Action<object> job, object message)
         {
-            Task.Run((Action)(() => this.ExecuteSubscriber(container, message)));
+            Task.Run(() => { ExecuteSubscriber(job, message); });
         }
 
-        private void ExecuteSubscriberInBackground(object container, object message)
+        private void ExecuteSubscriberInBackground(Action<object> job, object message)
         {
-            if (this._threadHelper.IsMainThread())
-                this._threadHelper.NewThread((Action)(() => this.ExecuteSubscriber(container, message)));
+            if (ThreadHelper.IsMainThread())
+                ThreadHelper.NewThread(() => { ExecuteSubscriber(job, message); });
             else
-                this.ExecuteSubscriber(container, message);
+                ExecuteSubscriber(job, message);
         }
 
-        private void ExecuteSubscriber(object container, object message)
+        private void ExecuteSubscriber(Action<object> job, object message)
         {
-            this._subscriberMethodInfo.Invoke(container, BindingFlags.Instance | BindingFlags.InvokeMethod, (Binder)null, new object[1]
-            {
-        message
-            }, CultureInfo.CurrentCulture);
+            job(message);
         }
     }
 }

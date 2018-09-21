@@ -2,12 +2,12 @@
 
 namespace TQElectronic.Utils.Event
 {
-    public interface IThreadHelper
+    public interface IThreadHelper : IDisposable
     {
         bool IsMainThread();
 
         void NewThread(Action job);
 
-        void RunInMain(Action job, bool wait);
+        void RunInMainThread(Action job, bool wait);
     }
 }
