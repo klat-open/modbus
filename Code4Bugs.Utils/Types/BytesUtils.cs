@@ -172,5 +172,22 @@ namespace Code4Bugs.Utils.Types
                 Array.Reverse(copied);
             return copied;
         }
+
+        public static bool AreEqual(this byte[] bytes1, byte[] bytes2)
+        {
+            if (bytes2 == null)
+                return false;
+
+            if (bytes1.Length != bytes2.Length)
+                return false;
+
+            for (var i = 0; i < bytes1.Length; i++)
+            {
+                if (bytes1[i] != bytes2[i])
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

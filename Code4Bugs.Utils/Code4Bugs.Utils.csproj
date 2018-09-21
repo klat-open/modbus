@@ -50,6 +50,14 @@
     <Compile Include="Event\Precondition.cs" />
     <Compile Include="Event\SubscribeAttribute.cs" />
     <Compile Include="Event\Subscriber.cs" />
+    <Compile Include="IO\Checksum.cs" />
+    <Compile Include="IO\EmptyResponsedException.cs" />
+    <Compile Include="IO\DataCorruptedException.cs" />
+    <Compile Include="IO\ICommStream.cs" />
+    <Compile Include="IO\MissingDataException.cs" />
+    <Compile Include="IO\Modbus.cs" />
+    <Compile Include="IO\SerialStream.cs" />
+    <Compile Include="IO\TcpStream.cs" />
     <Compile Include="Limitation\FrequencyThrottler.cs" />
     <Compile Include="Limitation\IThrottler.cs" />
     <Compile Include="Limitation\TimeoutThrottler.cs" />
