@@ -55,6 +55,11 @@
     <Compile Include="Event\DummyThreadHelper.cs" />
     <Compile Include="Event\EventBusTest.cs" />
     <Compile Include="Event\DummyMessage.cs" />
+    <Compile Include="IO\DummyStream.cs" />
+    <Compile Include="IO\ModbusTest.Func16.cs" />
+    <Compile Include="IO\ModbusTest.Func6.cs" />
+    <Compile Include="IO\ModbusTest.Func4.cs" />
+    <Compile Include="IO\ModbusTest.Func3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

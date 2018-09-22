@@ -55,7 +55,7 @@
     <Compile Include="IO\DataCorruptedException.cs" />
     <Compile Include="IO\ICommStream.cs" />
     <Compile Include="IO\MissingDataException.cs" />
-    <Compile Include="IO\Modbus.cs" />
+    <Compile Include="IO\ModbusRtu.cs" />
     <Compile Include="IO\SerialStream.cs" />
     <Compile Include="IO\TcpStream.cs" />
     <Compile Include="Limitation\FrequencyThrottler.cs" />

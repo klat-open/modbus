@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Code4Bugs.Utils.IO
 {
-    public static class Modbus
+    public static class ModbusRtu
     {
         public static byte[] RequestFunc3(this ICommStream stream, int slaveAddress, int dataAddress, int registerCount)
         {
@@ -157,7 +157,7 @@ namespace Code4Bugs.Utils.IO
                 throw new DataCorruptedException($"Wrong response function code. Expected {funcCode}, actual {response[1]}");
         }
 
-        private static byte[] ReceiveMessage(ICommStream stream, int length)
+        internal static byte[] ReceiveMessage(ICommStream stream, int length)
         {
             var timeout = stream.ReadTimeout;
 
