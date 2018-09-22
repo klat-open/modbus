@@ -6,13 +6,13 @@ namespace Code4Bugs.Utils.IO.Modbus
 {
     public static partial class Modbus
     {
-        private static byte[] BuildFunc16Message(int slaveAddress, int dataAddress, byte[] writeValue)
+        private static byte[] BuildFunc16Message(int slaveId, int dataAddress, byte[] writeValue)
         {
             //Function 16 request is always 9+ bytes
             var message = new byte[9 + writeValue.Length];
             var registerCount = writeValue.Length / 2;
 
-            message[0] = (byte)slaveAddress;
+            message[0] = (byte)slaveId;
 
             message[1] = 16;
 
@@ -33,16 +33,16 @@ namespace Code4Bugs.Utils.IO.Modbus
             return message;
         }
 
-        private static byte[] BuildFunc6Message(int slaveAddress, int dataAddress, int writeValue)
+        private static byte[] BuildFunc6Message(int slaveId, int dataAddress, int writeValue)
         {
-            return BuildFunc3And4Message(slaveAddress, 6, dataAddress, writeValue);
+            return BuildFunc3And4Message(slaveId, 6, dataAddress, writeValue);
         }
 
-        private static byte[] BuildFunc3And4Message(int slaveAddress, int funcCode, int dataAddress, int registerCount)
+        private static byte[] BuildFunc3And4Message(int slaveId, int funcCode, int dataAddress, int registerCount)
         {
             var message = new byte[8];
 
-            message[0] = (byte)slaveAddress;
+            message[0] = (byte)slaveId;
             message[1] = (byte)funcCode;
             message[2] = (byte)(dataAddress >> 8);
             message[3] = (byte)dataAddress;
@@ -74,10 +74,10 @@ namespace Code4Bugs.Utils.IO.Modbus
                 throw new DataCorruptedException("checksum failed.");
         }
 
-        private static void VerifyGeneralStructure(byte[] response, int slaveAddress, int funcCode)
+        private static void VerifyGeneralStructure(byte[] response, int slaveId, int funcCode)
         {
-            if (response[0] != slaveAddress)
-                throw new DataCorruptedException($"Wrong response slave address. Expected {slaveAddress}, actual {response[0]}");
+            if (response[0] != slaveId)
+                throw new DataCorruptedException($"Wrong response slave address. Expected {slaveId}, actual {response[0]}");
 
             if (response[1] != funcCode)
                 throw new DataCorruptedException($"Wrong response function code. Expected {funcCode}, actual {response[1]}");

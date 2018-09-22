@@ -55,8 +55,15 @@
     <Compile Include="IO\DataCorruptedException.cs" />
     <Compile Include="IO\ICommStream.cs" />
     <Compile Include="IO\MissingDataException.cs" />
+    <Compile Include="IO\Modbus\Data\Response.cs" />
+    <Compile Include="IO\Modbus\Data\ResponseFunc16.cs" />
+    <Compile Include="IO\Modbus\Data\ResponseFunc6.cs" />
+    <Compile Include="IO\Modbus\Data\ResponseFunc4.cs" />
+    <Compile Include="IO\Modbus\Data\ResponseFunc3.cs" />
     <Compile Include="IO\Modbus\Modbus.cs" />
     <Compile Include="IO\Modbus\Modbus.Rtu.cs" />
+    <Compile Include="IO\Modbus\ResponseParser.Rtu.cs" />
+    <Compile Include="IO\Modbus\ResponseParser.cs" />
     <Compile Include="IO\SerialStream.cs" />
     <Compile Include="IO\TcpStream.cs" />
     <Compile Include="Limitation\FrequencyThrottler.cs" />

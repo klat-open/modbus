@@ -60,6 +60,7 @@
     <Compile Include="IO\ModbusTest.Func6.cs" />
     <Compile Include="IO\ModbusTest.Func4.cs" />
     <Compile Include="IO\ModbusTest.Func3.cs" />
+    <Compile Include="IO\ResponseParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

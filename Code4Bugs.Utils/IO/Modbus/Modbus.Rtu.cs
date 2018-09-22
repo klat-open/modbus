@@ -4,9 +4,9 @@ namespace Code4Bugs.Utils.IO.Modbus
 {
     public static partial class Modbus
     {
-        public static byte[] RequestFunc3(this ICommStream stream, int slaveAddress, int dataAddress, int registerCount)
+        public static byte[] RequestFunc3(this ICommStream stream, int slaveId, int dataAddress, int registerCount)
         {
-            var message = BuildFunc3And4Message(slaveAddress, 3, dataAddress, registerCount);
+            var message = BuildFunc3And4Message(slaveId, 3, dataAddress, registerCount);
             lock (stream)
             {
                 stream.Write(message, 0, message.Length);
@@ -16,15 +16,15 @@ namespace Code4Bugs.Utils.IO.Modbus
 
                 VerifyEmptyResponse(response);
                 VerifyChecksum(response);
-                VerifyGeneralStructure(response, slaveAddress, 3);
+                VerifyGeneralStructure(response, slaveId, 3);
 
                 return response;
             }
         }
 
-        public static byte[] RequestFunc4(this ICommStream stream, int slaveAddress, int dataAddress, int registerCount)
+        public static byte[] RequestFunc4(this ICommStream stream, int slaveId, int dataAddress, int registerCount)
         {
-            var message = BuildFunc3And4Message(slaveAddress, 4, dataAddress, registerCount);
+            var message = BuildFunc3And4Message(slaveId, 4, dataAddress, registerCount);
             lock (stream)
             {
                 stream.Write(message, 0, message.Length);
@@ -34,15 +34,15 @@ namespace Code4Bugs.Utils.IO.Modbus
 
                 VerifyEmptyResponse(response);
                 VerifyChecksum(response);
-                VerifyGeneralStructure(response, slaveAddress, 4);
+                VerifyGeneralStructure(response, slaveId, 4);
 
                 return response;
             }
         }
 
-        public static byte[] RequestFunc6(this ICommStream stream, int slaveAddress, int dataAddress, int writeValue)
+        public static byte[] RequestFunc6(this ICommStream stream, int slaveId, int dataAddress, int writeValue)
         {
-            var message = BuildFunc6Message(slaveAddress, dataAddress, writeValue);
+            var message = BuildFunc6Message(slaveId, dataAddress, writeValue);
             lock (stream)
             {
                 stream.Write(message, 0, message.Length);
@@ -58,9 +58,9 @@ namespace Code4Bugs.Utils.IO.Modbus
             }
         }
 
-        public static byte[] RequestFunc16(this ICommStream stream, int slaveAddress, int dataAddress, byte[] writeValue)
+        public static byte[] RequestFunc16(this ICommStream stream, int slaveId, int dataAddress, byte[] writeValue)
         {
-            var message = BuildFunc16Message(slaveAddress, dataAddress, writeValue);
+            var message = BuildFunc16Message(slaveId, dataAddress, writeValue);
             lock (stream)
             {
                 stream.Write(message, 0, message.Length);
@@ -69,7 +69,7 @@ namespace Code4Bugs.Utils.IO.Modbus
 
                 VerifyEmptyResponse(response);
                 VerifyChecksum(response);
-                VerifyGeneralStructure(response, slaveAddress, 16);
+                VerifyGeneralStructure(response, slaveId, 16);
 
                 return response;
             }
