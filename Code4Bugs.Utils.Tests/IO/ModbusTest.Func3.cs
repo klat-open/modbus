@@ -1,4 +1,5 @@
 ﻿using Code4Bugs.Utils.IO;
+using Code4Bugs.Utils.IO.Modbus;
 using NUnit.Framework;
 
 namespace Code4Bugs.Utils.Tests.IO

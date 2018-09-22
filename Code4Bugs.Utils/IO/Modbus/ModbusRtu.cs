@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace Code4Bugs.Utils.IO
+namespace Code4Bugs.Utils.IO.Modbus
 {
     public static class ModbusRtu
     {
