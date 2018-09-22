@@ -42,12 +42,20 @@
     <Reference Include="Config4Net.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\dotnet-utils\packages\Config4Net.Core.1.0.1\lib\net45\Config4Net.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Charts.Designer.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Charts.v17.1.Core, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v17.1.Core, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1.Extensions, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1.UI, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1.Wizard, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\dotnet-utils\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -59,6 +67,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Charts\CachedItem.cs" />
+    <Compile Include="Charts\DummyDiagramImpl.cs" />
+    <Compile Include="Charts\DummySeriesView.cs" />
+    <Compile Include="Charts\IDiagram.cs" />
+    <Compile Include="Charts\ISeries.cs" />
+    <Compile Include="Charts\ISeriesView.cs" />
+    <Compile Include="Charts\LimitLine.cs" />
+    <Compile Include="Charts\RealtimeChartHelper.cs" />
+    <Compile Include="Charts\SeriesBundle.Cached.cs" />
+    <Compile Include="Charts\SeriesBundle.cs" />
+    <Compile Include="Charts\SeriesInChart.cs" />
+    <Compile Include="Charts\SeriesInMemory.cs" />
+    <Compile Include="Charts\StepLineDiagramImpl.cs" />
+    <Compile Include="Charts\StepLineSeriesViewImpl.cs" />
+    <Compile Include="Charts\SwiftPlotDiagramImpl.cs" />
+    <Compile Include="Charts\SwiftPlotSeriesViewImpl.cs" />
+    <Compile Include="Charts\Writer.cs" />
     <Compile Include="Editors\TextEditUtils.cs" />
     <Compile Include="Forms\ChooserForm.cs">
       <SubType>Form</SubType>
