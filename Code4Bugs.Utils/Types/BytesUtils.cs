@@ -26,22 +26,22 @@ namespace Code4Bugs.Utils.Types
 
         public static short ToInt16(this byte[] bytes, int offset = 0, bool srcIsLittleEndian = false)
         {
-            return bytes.ToNumber(offset, srcIsLittleEndian, 4, BitConverter.ToInt16);
+            return bytes.ToNumber(offset, srcIsLittleEndian, 2, BitConverter.ToInt16);
         }
 
         public static ushort ToUInt16(this byte[] bytes, int offset = 0, bool srcIsLittleEndian = false)
         {
-            return bytes.ToNumber(offset, srcIsLittleEndian, 4, BitConverter.ToUInt16);
+            return bytes.ToNumber(offset, srcIsLittleEndian, 2, BitConverter.ToUInt16);
         }
 
         public static long ToInt64(this byte[] bytes, int offset = 0, bool srcIsLittleEndian = false)
         {
-            return bytes.ToNumber(offset, srcIsLittleEndian, 4, BitConverter.ToInt64);
+            return bytes.ToNumber(offset, srcIsLittleEndian, 8, BitConverter.ToInt64);
         }
 
         public static ulong ToUInt64(this byte[] bytes, int offset = 0, bool srcIsLittleEndian = false)
         {
-            return bytes.ToNumber(offset, srcIsLittleEndian, 4, BitConverter.ToUInt64);
+            return bytes.ToNumber(offset, srcIsLittleEndian, 8, BitConverter.ToUInt64);
         }
 
         public static T ToNumber<T>(this byte[] bytes, int offset, bool srcIsLittleEndian, int byteCount, Func<byte[], int, T> convertFunc)
