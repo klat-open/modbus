@@ -91,6 +91,7 @@
     <Compile Include="SystemManagement\ProcessInfoUtils.cs" />
     <Compile Include="SystemManagement\SystemInfo.cs" />
     <Compile Include="SystemManagement\SystemInfoUtils.cs" />
+    <Compile Include="Timers\TimerUtils.cs" />
     <Compile Include="Types\BytesUtils.cs" />
     <Compile Include="Types\CollectionUtils.cs" />
     <Compile Include="Types\DateTimeUtils.cs" />
