@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Text;
 
 namespace Code4Bugs.Utils.Types
 {
@@ -103,10 +105,14 @@ namespace Code4Bugs.Utils.Types
                 bytes = BitConverter.GetBytes(ulongValue);
 
             if (bytes == null)
-                throw new InvalidCastException("T must be int, uint, short, ushort, long or ulong.");
+            {
+                var json = JsonConvert.SerializeObject(value);
+                bytes = Encoding.UTF8.GetBytes(json);
+            }
 
             if (destIsLittleEndian != BitConverter.IsLittleEndian)
                 Array.Reverse(bytes);
+
             return bytes;
         }
 
