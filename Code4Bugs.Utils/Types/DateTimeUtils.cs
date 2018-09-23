@@ -17,5 +17,20 @@ namespace Code4Bugs.Utils.Types
             var unixTime = _unixZeroPoint + TimeSpan.FromSeconds(unixEpoch);
             return unixTime.ToLocalTime();
         }
+
+        public static string ToDateTimeString(this DateTime dateTime)
+        {
+            return $"{ToTimeString(dateTime)} - {ToDateString(dateTime)}";
+        }
+
+        public static string ToDateString(this DateTime dateTime)
+        {
+            return dateTime.ToString("dd/MM/yyyy");
+        }
+
+        public static string ToTimeString(this DateTime dateTime)
+        {
+            return dateTime.ToString("HH:mm:ss");
+        }
     }
 }
