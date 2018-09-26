@@ -8,13 +8,19 @@ namespace Code4Bugs.Utils.DevExpress.Forms
 {
     public partial class LookAndFeelSettingsForm : _LookAndFeelSettingsForm
     {
+        private static readonly string[] DefaultFlatSkinNames = new string [] { "Visual Studio 2013 Dark", "Visual Studio 2013 Light" };
+
+        public bool UseFlatSkin { get; set; }
+
         public LookAndFeelSettingsForm()
         {
             InitializeComponent();
         }
-
+        
         private string[] GetSkinNames()
         {
+            if (UseFlatSkin) return DefaultFlatSkinNames;
+
             var skins = SkinManager.Default.Skins;
             var skinNames = new List<string>();
             for (var i = 0; i < skins.Count; i++)
