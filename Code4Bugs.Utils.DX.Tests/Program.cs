@@ -14,7 +14,8 @@ namespace Code4Bugs.Utils.DX.Tests
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new ModernForm());
+            var f = new AboutForm();
+            Application.Run(f);
         }
     }
 }

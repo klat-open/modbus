@@ -76,6 +76,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Code4Bugs.Utils.DX\Code4Bugs.Utils.DX.csproj">
+      <Project>{fb4e9900-5774-4fe2-b54f-07844c3c16b7}</Project>
+      <Name>Code4Bugs.Utils.DX</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

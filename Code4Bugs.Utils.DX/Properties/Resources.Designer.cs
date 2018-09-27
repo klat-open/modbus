@@ -61,6 +61,16 @@ namespace Code4Bugs.Utils.DX.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap default_about_background {
+            get {
+                object obj = ResourceManager.GetObject("default_about_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to xuanson33bk@gmail.com.
         /// </summary>
         internal static string devMail {
