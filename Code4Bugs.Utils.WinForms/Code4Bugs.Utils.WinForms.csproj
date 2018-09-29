@@ -38,6 +38,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlUtils.cs" />
     <Compile Include="Crash\CrashHandler.cs" />
     <Compile Include="Crash\IReportWindow.cs" />
     <Compile Include="DynamicDock.cs" />
