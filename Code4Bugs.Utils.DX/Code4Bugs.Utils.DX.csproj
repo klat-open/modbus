@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Config4Net.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Config4Net.Core.1.0.1\lib\net45\Config4Net.Core.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Config4Net.Core.1.0.1\lib\net45\Config4Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="Config4Net.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Config4Net.Core.1.0.1\lib\net45\Config4Net.Utils.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Config4Net.Core.1.0.1\lib\net45\Config4Net.Utils.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Charts.Designer.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Charts.v17.1.Core, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
