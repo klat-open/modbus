@@ -74,7 +74,7 @@ namespace Code4Bugs.Utils.DX.Charts
                 if (_autoScale != value)
                 {
                     PrimarySeriesBundle.SetAutoScale(value);
-                    SecondarySeriesBundle.SetAutoScale(value);
+                    SecondarySeriesBundle?.SetAutoScale(value);
                 }
 
                 _autoScale = value;
@@ -92,8 +92,11 @@ namespace Code4Bugs.Utils.DX.Charts
 
                 PrimarySeriesBundle.UpperLimit = value;
                 PrimarySeriesBundle.SetAutoScale(_autoScale);
-                SecondarySeriesBundle.UpperLimit = value;
-                SecondarySeriesBundle.SetAutoScale(_autoScale);
+                if (SecondarySeriesBundle != null)
+                {
+                    SecondarySeriesBundle.UpperLimit = value;
+                    SecondarySeriesBundle.SetAutoScale(_autoScale);
+                }
 
                 _diagram.SetUpperLimit(value);
             }
@@ -102,7 +105,7 @@ namespace Code4Bugs.Utils.DX.Charts
         private CachedItem GetGlobalOldestPoint()
         {
             var primaryOldestPoint = PrimarySeriesBundle.OldestPoint;
-            var secondaryOldestPoint = SecondarySeriesBundle.OldestPoint;
+            var secondaryOldestPoint = SecondarySeriesBundle != null ? SecondarySeriesBundle.OldestPoint : null;
             if (primaryOldestPoint == null) return secondaryOldestPoint;
             if (secondaryOldestPoint == null) return primaryOldestPoint;
             return primaryOldestPoint.Time < secondaryOldestPoint.Time
@@ -113,7 +116,7 @@ namespace Code4Bugs.Utils.DX.Charts
         private CachedItem GetGlobalNewestPoint()
         {
             var primaryNewestPoint = PrimarySeriesBundle.NewestPoint;
-            var secondaryNewestPoint = SecondarySeriesBundle.NewestPoint;
+            var secondaryNewestPoint = SecondarySeriesBundle != null ? SecondarySeriesBundle.NewestPoint : null;
             if (primaryNewestPoint == null) return secondaryNewestPoint;
             if (secondaryNewestPoint == null) return primaryNewestPoint;
             return primaryNewestPoint.Time > secondaryNewestPoint.Time
@@ -142,7 +145,7 @@ namespace Code4Bugs.Utils.DX.Charts
             _chartControl.RuntimeHitTesting = false;
             _chartControl.CacheToMemory = true;
             PrimarySeriesBundle.SetAntialiasing(false);
-            SecondarySeriesBundle.SetAntialiasing(false);
+            SecondarySeriesBundle?.SetAntialiasing(false);
         }
 
         public void OptimizeMemory()
@@ -153,13 +156,13 @@ namespace Code4Bugs.Utils.DX.Charts
             _chartControl.RuntimeHitTesting = false;
             _chartControl.CacheToMemory = false;
             PrimarySeriesBundle.SetAntialiasing(false);
-            SecondarySeriesBundle.SetAntialiasing(false);
+            SecondarySeriesBundle?.SetAntialiasing(false);
         }
 
         public void Clear()
         {
             PrimarySeriesBundle.Clear();
-            SecondarySeriesBundle.Clear();
+            SecondarySeriesBundle?.Clear();
         }
 
         public void Append(double value, DateTime dateTime)
@@ -171,6 +174,7 @@ namespace Code4Bugs.Utils.DX.Charts
 
         public void Append2(double value, DateTime dateTime)
         {
+            if (SecondarySeriesBundle == null) return;
             Append(SecondarySeriesBundle, value, dateTime);
             if (PrimarySeriesBundle != null)
                 PrimarySeriesBundle.IsInterrupt = true;
@@ -246,7 +250,7 @@ namespace Code4Bugs.Utils.DX.Charts
             if (globalOldestPoint != null)
             {
                 PrimarySeriesBundle.RemoveOldestIfNecessary(globalOldestPoint.Time);
-                SecondarySeriesBundle.RemoveOldestIfNecessary(globalOldestPoint.Time);
+                SecondarySeriesBundle?.RemoveOldestIfNecessary(globalOldestPoint.Time);
             }
         }
 
