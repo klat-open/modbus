@@ -102,6 +102,8 @@ namespace Code4Bugs.Utils.DX.Charts
             }
         }
 
+        public Func<double, DateTime, string> LegendTextRenderer { get; set; }
+
         private CachedItem GetGlobalOldestPoint()
         {
             var primaryOldestPoint = PrimarySeriesBundle.OldestPoint;
@@ -170,6 +172,7 @@ namespace Code4Bugs.Utils.DX.Charts
             Append(PrimarySeriesBundle, value, dateTime);
             if (SecondarySeriesBundle != null)
                 SecondarySeriesBundle.IsInterrupt = true;
+            UpdateLegendIfNecessary(value, dateTime);
         }
 
         public void Append2(double value, DateTime dateTime)
@@ -178,67 +181,20 @@ namespace Code4Bugs.Utils.DX.Charts
             Append(SecondarySeriesBundle, value, dateTime);
             if (PrimarySeriesBundle != null)
                 PrimarySeriesBundle.IsInterrupt = true;
+            UpdateLegendIfNecessary(value, dateTime);
         }
 
-        public void CopyFrom(RealtimeChartHelper fromHelper)
+        private void UpdateLegendIfNecessary(double value, DateTime dateTime)
         {
-            Clear();
-            HighLine?.CopyFrom(fromHelper.HighLine);
-            LowLine?.CopyFrom(fromHelper.LowLine);
-            PrimarySeriesBundle?.CopyFrom(fromHelper.PrimarySeriesBundle);
-            SecondarySeriesBundle?.CopyFrom(fromHelper.SecondarySeriesBundle);
-        }
-
-        public void Hide()
-        {
-            PrimarySeriesBundle?.Hide();
-            SecondarySeriesBundle?.Hide();
-        }
-
-        public void Show()
-        {
-            PrimarySeriesBundle?.Show();
-            SecondarySeriesBundle?.Show();
-        }
-
-        public Writer GetWriter()
-        {
-            return new Writer(
-                _chartControl,
-                PrimarySeriesBundle,
-                _upperLimit,
-                PaddingBottom,
-                _diagram,
-                _autoScale,
-                RoundDigits);
-        }
-
-        public Writer GetWriter2()
-        {
-            return new Writer(
-                _chartControl,
-                SecondarySeriesBundle,
-                _upperLimit,
-                PaddingBottom,
-                _diagram,
-                _autoScale,
-                RoundDigits);
-        }
-
-        private ISeries GetGlobalOldestSeries()
-        {
-            ISeries primaryOldestSeries = null;
-            ISeries secondaryOldestSeries = null;
-            if (PrimarySeriesBundle != null)
-                primaryOldestSeries = PrimarySeriesBundle.GetOldestSeries();
-            if (SecondarySeriesBundle != null)
-                secondaryOldestSeries = SecondarySeriesBundle.GetOldestSeries();
-            if (primaryOldestSeries == null || primaryOldestSeries.PointCount == 0) return secondaryOldestSeries;
-            if (secondaryOldestSeries == null || secondaryOldestSeries.PointCount == 0) return primaryOldestSeries;
-
-            return primaryOldestSeries.OldestPoint.Time < secondaryOldestSeries.OldestPoint.Time
-                ? primaryOldestSeries
-                : secondaryOldestSeries;
+            if (LiveMode && SecondarySeriesBundle == null && LegendTextRenderer != null)
+            {
+                var series = _chartControl.Series[Name];
+                if (series != null)
+                {
+                    var legendText = LegendTextRenderer(value, dateTime);
+                    series.LegendText = legendText;
+                }
+            }
         }
 
         private void Append(SeriesBundle seriesBundle, double value, DateTime dateTime)
@@ -286,6 +242,67 @@ namespace Code4Bugs.Utils.DX.Charts
                 displayValue = _upperLimit;
 
             series.Append(dateTime, displayValue, originValue);
+        }
+
+        private ISeries GetGlobalOldestSeries()
+        {
+            ISeries primaryOldestSeries = null;
+            ISeries secondaryOldestSeries = null;
+            if (PrimarySeriesBundle != null)
+                primaryOldestSeries = PrimarySeriesBundle.GetOldestSeries();
+            if (SecondarySeriesBundle != null)
+                secondaryOldestSeries = SecondarySeriesBundle.GetOldestSeries();
+            if (primaryOldestSeries == null || primaryOldestSeries.PointCount == 0) return secondaryOldestSeries;
+            if (secondaryOldestSeries == null || secondaryOldestSeries.PointCount == 0) return primaryOldestSeries;
+
+            return primaryOldestSeries.OldestPoint.Time < secondaryOldestSeries.OldestPoint.Time
+                ? primaryOldestSeries
+                : secondaryOldestSeries;
+        }
+
+        public void CopyFrom(RealtimeChartHelper fromHelper)
+        {
+            Clear();
+            HighLine?.CopyFrom(fromHelper.HighLine);
+            LowLine?.CopyFrom(fromHelper.LowLine);
+            PrimarySeriesBundle?.CopyFrom(fromHelper.PrimarySeriesBundle);
+            SecondarySeriesBundle?.CopyFrom(fromHelper.SecondarySeriesBundle);
+        }
+
+        public void Hide()
+        {
+            PrimarySeriesBundle?.Hide();
+            SecondarySeriesBundle?.Hide();
+        }
+
+        public void Show()
+        {
+            PrimarySeriesBundle?.Show();
+            SecondarySeriesBundle?.Show();
+        }
+
+        public Writer GetWriter()
+        {
+            return new Writer(
+                _chartControl,
+                PrimarySeriesBundle,
+                _upperLimit,
+                PaddingBottom,
+                _diagram,
+                _autoScale,
+                RoundDigits);
+        }
+
+        public Writer GetWriter2()
+        {
+            return new Writer(
+                _chartControl,
+                SecondarySeriesBundle,
+                _upperLimit,
+                PaddingBottom,
+                _diagram,
+                _autoScale,
+                RoundDigits);
         }
 
         private ISeriesView CreateSeriesView(ChartControl fromChartControl)
