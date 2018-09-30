@@ -64,6 +64,7 @@
     <Compile Include="IO\Modbus\Modbus.Rtu.cs" />
     <Compile Include="IO\Modbus\ResponseParser.Rtu.cs" />
     <Compile Include="IO\Modbus\ResponseParser.cs" />
+    <Compile Include="IO\PathUtils.cs" />
     <Compile Include="IO\SerialStream.cs" />
     <Compile Include="IO\TcpStream.cs" />
     <Compile Include="Limitation\FrequencyThrottler.cs" />
