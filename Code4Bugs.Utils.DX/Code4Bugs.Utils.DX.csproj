@@ -157,16 +157,6 @@
     <Compile Include="UserControls\Settings\SeriesLineSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Code4Bugs.Utils.WinForms\Code4Bugs.Utils.WinForms.csproj">
-      <Project>{dacc15d8-d0fb-4c27-884c-148af2c43148}</Project>
-      <Name>Code4Bugs.Utils.WinForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Code4Bugs.Utils\Code4Bugs.Utils.csproj">
-      <Project>{c3cb9e21-a6d4-4be6-a06d-9d9a3636d5de}</Project>
-      <Name>Code4Bugs.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +211,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default_about_background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Code4Bugs.Utils.WinForms\Code4Bugs.Utils.WinForms.csproj">
+      <Project>{dacc15d8-d0fb-4c27-884c-148af2c43148}</Project>
+      <Name>Code4Bugs.Utils.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Code4Bugs.Utils\Code4Bugs.Utils.csproj">
+      <Project>{c3cb9e21-a6d4-4be6-a06d-9d9a3636d5de}</Project>
+      <Name>Code4Bugs.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
