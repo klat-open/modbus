@@ -98,6 +98,7 @@
     <Compile Include="Types\CollectionUtils.cs" />
     <Compile Include="Types\DateTimeUtils.cs" />
     <Compile Include="Types\EnumUtils.cs" />
+    <Compile Include="Types\ObjectUtils.cs" />
     <Compile Include="Types\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
