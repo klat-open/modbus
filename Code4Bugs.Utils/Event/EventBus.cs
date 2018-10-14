@@ -23,7 +23,7 @@ namespace Code4Bugs.Utils.Event
         private readonly IList<object> _messageStacked;
 
         private IThreadHelper _threadHelper;
-        
+
         public void SetThreadHelper(IThreadHelper threadHelper)
         {
             Precondition.ArgumentNotNull(threadHelper, nameof(threadHelper));
@@ -178,16 +178,14 @@ namespace Code4Bugs.Utils.Event
 
             var consumed = false;
 
-            lock (_subscriberList)
+            var subscriberList = new Dictionary<Type, IList<Subscriber>>(_subscriberList);
+            foreach (var node in subscriberList)
             {
-                foreach (var node in _subscriberList)
+                if (!node.Key.IsInstanceOfType(message)) continue;
+                foreach (var subscriber in node.Value)
                 {
-                    if (!node.Key.IsInstanceOfType(message)) continue;
-                    foreach (var subscriber in node.Value)
-                    {
-                        subscriber.Execute(message);
-                        consumed = true;
-                    }
+                    subscriber.Execute(message);
+                    consumed = true;
                 }
             }
 
