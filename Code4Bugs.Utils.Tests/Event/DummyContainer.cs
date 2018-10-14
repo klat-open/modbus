@@ -8,10 +8,24 @@ namespace Code4Bugs.Utils.Tests.Event
 
         public event MessageDelegate SubscriberExecuted;
 
-        [Subscribe]
-        private void SubscriberMethod(DummyMessage msg)
+        protected void Trigger(DummyMessage msg)
         {
             SubscriberExecuted?.Invoke(msg);
+        }
+
+        [Subscribe]
+        protected void SubscriberMethod(DummyMessage msg)
+        {
+            Trigger(msg);
+        }
+    }
+
+    internal class InheritDummyContainer : DummyContainer
+    {
+        [Subscribe]
+        private void AnotherSubscriberMethod(DummyMessage msg)
+        {
+            Trigger(msg);
         }
     }
 }

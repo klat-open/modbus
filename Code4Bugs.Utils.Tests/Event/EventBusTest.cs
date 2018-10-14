@@ -42,6 +42,23 @@ namespace Code4Bugs.Utils.Tests.Event
         }
 
         [Test]
+        public void inherit_container_can_subscribe()
+        {
+            var eventBus = CreateEventBus();
+            var container = new InheritDummyContainer();
+
+            DummyMessage message = null;
+            var calledCount = 0;
+            container.SubscriberExecuted += msg => { message = msg; calledCount++; };
+
+            eventBus.Register(container);
+            eventBus.Post(new DummyMessage { Content = "helloworld" });
+            Assert.NotNull(message);
+            Assert.AreEqual(message.Content, "helloworld");
+            Assert.AreEqual(2, calledCount, "Base object should call once, the inheritance also call once, so we need twice.");
+        }
+
+        [Test]
         public void container_can_subscribe_while_posting()
         {
             var eventBus = CreateEventBus();
