@@ -46,6 +46,16 @@ namespace Code4Bugs.Utils.Types
             return bytes.ToNumber(offset, srcIsLittleEndian, 8, BitConverter.ToUInt64);
         }
 
+        public static float ToFloat32(this byte[] bytes, int offset = 0, bool srcIsLittleEndian = false)
+        {
+            return bytes.ToNumber(offset, srcIsLittleEndian, 4, BitConverter.ToSingle);
+        }
+
+        public static double ToFloat64(this byte[] bytes, int offset = 0, bool srcIsLittleEndian = false)
+        {
+            return bytes.ToNumber(offset, srcIsLittleEndian, 8, BitConverter.ToDouble);
+        }
+
         public static T ToNumber<T>(this byte[] bytes, int offset, bool srcIsLittleEndian, int byteCount, Func<byte[], int, T> convertFunc)
         {
             if (srcIsLittleEndian == BitConverter.IsLittleEndian)
@@ -87,22 +97,36 @@ namespace Code4Bugs.Utils.Types
             return ToBytes<ulong>(value, destIsLittleEndian);
         }
 
+        public static byte[] ToBytes(this float value, bool destIsLittleEndian = false)
+        {
+            return ToBytes<float>(value, destIsLittleEndian);
+        }
+
+        public static byte[] ToBytes(this double value, bool destIsLittleEndian = false)
+        {
+            return ToBytes<double>(value, destIsLittleEndian);
+        }
+
         public static byte[] ToBytes<T>(this T value, bool destIsLittleEndian = false)
         {
             byte[] bytes = null;
 
             if (value is int intValue)
                 bytes = BitConverter.GetBytes(intValue);
-            if (value is uint uintValue)
+            else if (value is uint uintValue)
                 bytes = BitConverter.GetBytes(uintValue);
-            if (value is short shortValue)
+            else if (value is short shortValue)
                 bytes = BitConverter.GetBytes(shortValue);
-            if (value is ushort ushortValue)
+            else if (value is ushort ushortValue)
                 bytes = BitConverter.GetBytes(ushortValue);
-            if (value is long longValue)
+            else if (value is long longValue)
                 bytes = BitConverter.GetBytes(longValue);
-            if (value is ulong ulongValue)
+            else if (value is ulong ulongValue)
                 bytes = BitConverter.GetBytes(ulongValue);
+            else if (value is float floatValue)
+                bytes = BitConverter.GetBytes(floatValue);
+            else if (value is double doubleValue)
+                bytes = BitConverter.GetBytes(doubleValue);
 
             if (bytes == null)
             {
