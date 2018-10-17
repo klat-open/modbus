@@ -182,7 +182,9 @@ namespace Code4Bugs.Utils.Event
             foreach (var node in subscriberList)
             {
                 if (!node.Key.IsInstanceOfType(message)) continue;
-                foreach (var subscriber in node.Value)
+
+                var subscribers = new List<Subscriber>(node.Value);
+                foreach (var subscriber in subscribers)
                 {
                     subscriber.Execute(message);
                     consumed = true;
