@@ -1,12 +1,12 @@
-﻿using DevExpress.XtraCharts;
+﻿using DevExpress.Charts.Native;
+using DevExpress.XtraCharts;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using DevExpress.Charts.Native;
 
 namespace Code4Bugs.Utils.DX.Charts
 {
-    public sealed class YAxisHelper: IDisposable
+    public sealed class YAxisHelper : IDisposable
     {
         private ChartControl _chartControl;
         private string _crosshairFormat;
@@ -57,13 +57,16 @@ namespace Code4Bugs.Utils.DX.Charts
 
         private void ChartControl_CustomDrawCrosshair(object sender, CustomDrawCrosshairEventArgs e)
         {
-            foreach (var element in e.CrosshairElements)
+            foreach (var group in e.CrosshairElementGroups)
             {
-                var currentPoint = element.SeriesPoint;
-                var text = _crosshairFormatCallback != null
-                    ? _crosshairFormatCallback(currentPoint.Values[0])
-                    : string.Format(_crosshairFormat, currentPoint.Values[0]);
-                element.LabelElement.Text = $@"{element.Series.Name}: {text}";
+                foreach (var element in group.CrosshairElements)
+                {
+                    var currentPoint = element.SeriesPoint;
+                    var text = _crosshairFormatCallback != null
+                        ? _crosshairFormatCallback(currentPoint.Values[0])
+                        : string.Format(_crosshairFormat, currentPoint.Values[0]);
+                    element.LabelElement.Text = $@"{element.Series.Name}: {text}";
+                }
             }
         }
 
