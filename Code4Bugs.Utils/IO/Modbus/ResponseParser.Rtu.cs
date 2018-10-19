@@ -36,6 +36,17 @@ namespace Code4Bugs.Utils.IO.Modbus
             return data;
         }
 
+        public static ResponseFunc8 ToResponseFunc8(this byte[] response)
+        {
+            var data = new ResponseFunc8
+            {
+                SlaveId = response[0],
+                SubFunction = response.CopyRange(2, 2).ToInt16(),
+                Data = response.CopyRange(4, 2).ToInt16()
+            };
+            return data;
+        }
+
         public static ResponseFunc16 ToResponseFunc16(this byte[] response)
         {
             var data = new ResponseFunc16

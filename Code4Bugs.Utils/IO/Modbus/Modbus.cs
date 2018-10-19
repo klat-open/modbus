@@ -38,6 +38,11 @@ namespace Code4Bugs.Utils.IO.Modbus
             return BuildFunc3And4Message(slaveId, 6, dataAddress, writeValue);
         }
 
+        private static byte[] BuildFunc8Message(int slaveId, int subFunction, int data)
+        {
+            return BuildFunc3And4Message(slaveId, 8, subFunction, data);
+        }
+
         private static byte[] BuildFunc3And4Message(int slaveId, int funcCode, int dataAddress, int registerCount)
         {
             var message = new byte[8];

@@ -58,6 +58,7 @@
     <Compile Include="IO\MissingDataException.cs" />
     <Compile Include="IO\Modbus\Data\Response.cs" />
     <Compile Include="IO\Modbus\Data\ResponseFunc16.cs" />
+    <Compile Include="IO\Modbus\Data\ResponseFunc8.cs" />
     <Compile Include="IO\Modbus\Data\ResponseFunc6.cs" />
     <Compile Include="IO\Modbus\Data\ResponseFunc4.cs" />
     <Compile Include="IO\Modbus\Data\ResponseFunc3.cs" />

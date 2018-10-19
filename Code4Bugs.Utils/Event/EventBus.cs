@@ -183,7 +183,7 @@ namespace Code4Bugs.Utils.Event
             {
                 if (!node.Key.IsInstanceOfType(message)) continue;
 
-                var subscribers = new List<Subscriber>(node.Value);
+                var subscribers = node.Value.ToList();
                 foreach (var subscriber in subscribers)
                 {
                     subscriber.Execute(message);

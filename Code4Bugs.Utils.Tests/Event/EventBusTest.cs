@@ -65,7 +65,7 @@ namespace Code4Bugs.Utils.Tests.Event
 
             new Thread(() =>
             {
-                for (var i = 0; i < 500; i++)
+                for (var i = 0; i < 1000; i++)
                 {
                     eventBus.Post(new DummyMessage { Content = "helloworld" });
                     Thread.Sleep(10);
@@ -81,7 +81,7 @@ namespace Code4Bugs.Utils.Tests.Event
             Assert.AreEqual(message.Content, "helloworld");
             Assert.DoesNotThrow(() =>
             {
-                for (var i = 0; i < 500; i++)
+                for (var i = 0; i < 1000; i++)
                 {
                     var newContainer = new DummyContainer();
                     newContainer.SubscriberExecuted += msg =>

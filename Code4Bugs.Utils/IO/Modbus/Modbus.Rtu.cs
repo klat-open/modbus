@@ -58,6 +58,23 @@ namespace Code4Bugs.Utils.IO.Modbus
             }
         }
 
+        public static byte[] RequestFunc8(this ICommStream stream, int slaveId, int subFunction, int data)
+        {
+            var message = BuildFunc8Message(slaveId, subFunction, data);
+            lock (stream)
+            {
+                stream.Write(message, 0, message.Length);
+
+                var response = ReceiveMessage(stream, 8);
+
+                VerifyEmptyResponse(response);
+                VerifyChecksum(response);
+                VerifyGeneralStructure(response, slaveId, 8);
+
+                return response;
+            }
+        }
+
         public static byte[] RequestFunc16(this ICommStream stream, int slaveId, int dataAddress, byte[] writeValue)
         {
             var message = BuildFunc16Message(slaveId, dataAddress, writeValue);

@@ -1,5 +1,6 @@
 
 
+
 # Modbus library  
   
 To communicate with slaves, you must create an **ICommStream** (currently, this library supports for **SerialStream** via serial port). After that, call the request function corresponds witch each function code. The request function will send a request to slave and waiting for the response, at that time, other requests will be pending until the current one is completed.  
@@ -113,6 +114,38 @@ The normal response is an echo of the query, returned after the register content
 // the request needs: slaveId, dataAddress, writeValue
 var responseBytes = stream.RequestFunc6(0x11, 0x0001, 0x0003);
 // the reponse bytes should be an echo of the request.
+```
+### Diagnosis (FC=08)
+The diagnosis function provides a series of tests for checking the communication system between the master and the slave and for examining a variety of internal error states within the slave.
+
+**Request**
+
+This command is diagnosing the slave id 0x0B with sub function is 0x0000 and data is 0x0203.
+
+> 0B 08 0000 0203 A1C0
+
+- 0B: The slave address.
+- 08: The function code 8.
+- 0000: The function uses two bytes in the query to specify a sub function code defining the test that is to be carried out. The slave returns the function code and the sub function code in the response.
+- 0203: The diagnostics data or control information.
+- A1C0: The CRC (cyclic redundancy check) for error checking.
+
+**Response**
+
+> 0B 08 0000 0203 A1C0
+
+- 0B: The slave address.
+- 08: The function code 8.
+- 0000: The sub function that same likes the request.
+- 0203: Echo data.
+- A1C0: The CRC (cyclic redundancy check) for error checking.
+
+**Code**
+
+```csharp
+// send request and waiting for response
+// the request needs: slaveId, subFunction, data
+var responseBytes = stream.RequestFunc8(0x0B, 0x0000, 0x0203);
 ```
 
 ### Preset Multiple Registers (FC=16)
