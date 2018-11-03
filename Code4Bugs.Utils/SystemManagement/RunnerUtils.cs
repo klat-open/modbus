@@ -86,7 +86,7 @@ namespace Code4Bugs.Utils.SystemManagement
             var processName = Path.GetFileNameWithoutExtension(executablePath);
             var foundProcesses = Process.GetProcessesByName(processName);
             var currentNormalizePath = PathUtils.NormalizePath(executablePath);
-            return foundProcesses.Single(process => PathUtils.NormalizePath(GetMainModuleFileName(process)) == currentNormalizePath);
+            return foundProcesses.SingleOrDefault(process => PathUtils.NormalizePath(GetMainModuleFileName(process)) == currentNormalizePath);
         }
 
         private static string GetMainModuleFileName(Process process, int buffer = 2048)
