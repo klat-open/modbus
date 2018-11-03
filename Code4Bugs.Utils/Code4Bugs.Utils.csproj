@@ -90,8 +90,12 @@
     <Compile Include="Intercomm\Internal\SimpleWorker.cs" />
     <Compile Include="Intercomm\Internal\StreamString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManagement\RunnerUtils.cs" />
+    <Compile Include="SystemManagement\SingleApplicationRunner.cs" />
+    <Compile Include="SystemManagement\IRunner.cs" />
     <Compile Include="SystemManagement\ProcessInfo.cs" />
     <Compile Include="SystemManagement\ProcessInfoUtils.cs" />
+    <Compile Include="SystemManagement\ApplicationRunner.cs" />
     <Compile Include="SystemManagement\SystemInfo.cs" />
     <Compile Include="SystemManagement\SystemInfoUtils.cs" />
     <Compile Include="Timers\TimerUtils.cs" />
