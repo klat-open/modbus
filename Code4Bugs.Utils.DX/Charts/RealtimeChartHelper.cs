@@ -366,6 +366,9 @@ namespace Code4Bugs.Utils.DX.Charts
 
                 HighLine = new LimitLine(highLine);
                 LowLine = new LimitLine(lowLine);
+
+                highLine.ShowInLegend = false;
+                lowLine.ShowInLegend = false;
             }
 
             _diagram.ShowStretch();
